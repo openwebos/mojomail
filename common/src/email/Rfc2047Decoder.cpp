@@ -26,7 +26,7 @@ using namespace std;
 #include <unicode/ucnv.h>
 #include <unicode/ustring.h>
 
-#include "glib/gbase64.h"
+//#include "glib/gbase64.h"
 #include "glib.h"
 
 #include <boost/algorithm/string/predicate.hpp>

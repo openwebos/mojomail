@@ -127,5 +127,7 @@ target_link_libraries(email-common ${GLIB2_LDFLAGS} ${CJSON_LDFLAGS} ${MJCORE} $
 
 webos_build_pkgconfig()
 webos_build_library(NAME email-common)
-#install(FILES files/etc/palm/filecache_types/attachment DESTINATION /etc/palm/filecache_types)
-#install(FILES files/etc/palm/filecache_types/email DESTINATION /etc/palm/filecache_types)
+
+# Copy filecache files
+install(FILES files/filecache_types/attachment DESTINATION ${WEBOS_INSTALL_WEBOS_SYSCONFDIR}/filecache_types)
+install(FILES files/filecache_types/email DESTINATION ${WEBOS_INSTALL_WEBOS_SYSCONFDIR}/filecache_types)
