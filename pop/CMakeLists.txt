@@ -121,3 +121,6 @@ target_link_libraries(mojomail-pop ${Boost_LIBRARIES} ${GLIB2_LDFLAGS} ${MJCORE}
 webos_build_program(NAME mojomail-pop)
 webos_build_system_bus_files()
 webos_build_db8_files()
+
+# Copy Account template files
+install(DIRECTORY files/usr/palm/public/accounts DESTINATION ${WEBOS_INSTALL_WEBOS_PREFIX}/public/)
