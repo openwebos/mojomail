@@ -24,7 +24,7 @@ using namespace std;
 UIDMap::UIDMap(const vector<UID>& initialUidList, unsigned int msgCount, unsigned int maxSize)
 {
 	// Copy the uids (must already be sorted)
-	unsigned int listSize = maxSize > 0 ? std::min(maxSize, initialUidList.size()) : initialUidList.size();
+	unsigned int listSize = maxSize > 0 ? std::min(maxSize, (unsigned int)(initialUidList.size())) : initialUidList.size();
 
 	m_uids.insert(m_uids.begin(), initialUidList.end() - listSize, initialUidList.end());
 

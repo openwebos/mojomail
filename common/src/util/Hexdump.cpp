@@ -39,9 +39,10 @@ std::string Hexdump::FormatBytes(const char* data, size_t length)
 std::string Hexdump::FormatWrapped(const char* data, size_t length, unsigned int wrap)
 {
 	stringstream ss;
+	unsigned int len = (unsigned int)length;
 
-	for(unsigned int i = 0; i < length; i += wrap) {
-		ss << FormatBytes(&data[i], std::min(wrap, length - i)) << "\n";
+	for(unsigned int i = 0; i < len; i += wrap) {
+		ss << FormatBytes(&data[i], std::min(wrap, len - i)) << "\n";
 	}
 
 	return ss.str();
