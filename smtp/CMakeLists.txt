@@ -86,26 +86,9 @@ pkg_check_modules(JEMALLOC_MT REQUIRED jemalloc_mt)
 include_directories(${JEMALLOC_MT_INCLUDE_DIRS})
 webos_add_compiler_flags(ALL ${JEMALLOC_MT_CFLAGS})
 
-find_library(MJCORE NAMES mojocore libmojocore)
-if(MJCORE STREQUAL "MJCORE-NOTFOUND")
-        message(FATAL_ERROR "Failed to find libmojocore. Please install openwebos/db8")
-endif()
-
-find_library(MJLUNA NAMES mojoluna libmojoluna)
-if(MJLUNA STREQUAL "MJLUNA-NOTFOUND")
-        message(FATAL_ERROR "Failed to find libmojoluna. Please install openwebos/db8")
-endif()
-
-find_library(MJDB NAMES mojodb libmojodb)
-if(MJDB STREQUAL "MJDB-NOTFOUND")
-        message(FATAL_ERROR "Failed to find mojodb. Please install openwebos/db8")
-endif()
-
-find_path(MJ_INC NAMES mojodb/core/MojErr.h)
-if(MJ_INC STREQUAL "MJ_INC-NOTFOUND")
-        message(FATAL_ERROR "Failed to find mojodb header. Please install openwebos/db8")
-endif()
-include_directories(${MJ_INC}/mojodb)
+pkg_check_modules(DB8 REQUIRED db8)
+include_directories(${DB8_INCLUDE_DIRS})
+webos_add_compiler_flags(ALL ${DB8_CFLAGS_OTHER})
 
 find_library(ICU NAMES icuuc)
 if(ICU STREQUAL "ICU-NOTFOUND")
@@ -120,7 +103,7 @@ aux_source_directory(src/stream stream_files)
 
 add_executable(mojomail-smtp src/SmtpServiceApp.cpp src/SmtpSimpleSender.cpp src/SmtpBusDispatcher.cpp src/SmtpClient.cpp src/SmtpConfig.cpp src/SmtpPowerManager.cpp src/SmtpValidator.cpp ${activity_files} ${client_files} ${commands_files} ${data_files} ${stream_files}) 
 
-target_link_libraries(mojomail-smtp ${Boost_LIBRARIES} ${GLIB2_LDFLAGS} ${MJCORE} ${MJLUNA} ${MJDB} ${ICU} ${EMAILCOMMON_LDFLAGS} ${PALMSOCKET_LDFLAGS} ${SANDBOX_LDFLAGS} ${JEMALLOC_MT_LDFLAGS} ${PMLOG_LDFLAGS} ${CARES_LDFLAGS} ${PMSTATEMACHINE_LDFLAGS} pthread curl) 
+target_link_libraries(mojomail-smtp ${Boost_LIBRARIES} ${GLIB2_LDFLAGS} ${DB8_LDFLAGS} ${ICU} ${EMAILCOMMON_LDFLAGS} ${PALMSOCKET_LDFLAGS} ${SANDBOX_LDFLAGS} ${JEMALLOC_MT_LDFLAGS} ${PMLOG_LDFLAGS} ${CARES_LDFLAGS} ${PMSTATEMACHINE_LDFLAGS} pthread curl) 
 
 webos_build_program(NAME mojomail-smtp)
 webos_build_system_bus_files()

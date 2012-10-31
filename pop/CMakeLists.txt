@@ -82,31 +82,9 @@ pkg_check_modules(CARES REQUIRED libcares)
 include_directories(${CARES_INCLUDE_DIRS})
 webos_add_compiler_flags(ALL ${CARES_CFLAGS})
 
-find_library(MJCORE NAMES mojocore libmojocore)
-if(MJCORE STREQUAL "MJCORE-NOTFOUND")
-        message(FATAL_ERROR "Failed to find libmojocore. Please install openwebos/db8")
-endif()
-
-find_library(MJLUNA NAMES mojoluna libmojoluna)
-if(MJLUNA STREQUAL "MJLUNA-NOTFOUND")
-        message(FATAL_ERROR "Failed to find libmojoluna. Please install openwebos/db8")
-endif()
-
-find_library(MJDB NAMES mojodb libmojodb)
-if(MJDB STREQUAL "MJDB-NOTFOUND")
-        message(FATAL_ERROR "Failed to find mojodb. Please install openwebos/db8")
-endif()
-
-find_path(MJ_INC NAMES mojodb/core/MojErr.h)
-if(MJ_INC STREQUAL "MJ_INC-NOTFOUND")
-        message(FATAL_ERROR "Failed to find mojodb header. Please install openwebos/db8")
-endif()
-include_directories(${MJ_INC}/mojodb)
-
-find_library(ICU NAMES icuuc)
-if(ICU STREQUAL "ICU-NOTFOUND")
-   message(FATAL_ERROR "Failed to find ICU4C libaries. Please intall.")
-endif()
+pkg_check_modules(DB8 REQUIRED db8)
+include_directories(${DB8_INCLUDE_DIRS})
+webos_add_compiler_flags(ALL ${DB8_CFLAGS_OTHER})
 
 aux_source_directory(src/activity activity_files)
 aux_source_directory(src/client client_files)
@@ -116,7 +94,7 @@ aux_source_directory(src/request request_files)
 
 add_executable(mojomail-pop src/ParseEmlHandler.cpp src/PopBusDispatcher.cpp src/PopClient.cpp src/PopErrors.cpp src/PopMain.cpp src/PopValidator.cpp ${activity_files} ${client_files} ${commands_files} ${data_files} ${request_files}) 
 
-target_link_libraries(mojomail-pop ${Boost_LIBRARIES} ${GLIB2_LDFLAGS} ${MJCORE} ${MJLUNA} ${MJDB} ${ICU} ${EMAILCOMMON_LDFLAGS} ${PALMSOCKET_LDFLAGS} ${SANDBOX_LDFLAGS} ${PMLOG_LDFLAGS} ${CARES_LDFLAGS} ${PMSTATEMACHINE_LDFLAGS}) 
+target_link_libraries(mojomail-pop ${Boost_LIBRARIES} ${GLIB2_LDFLAGS} ${DB8_LDFLAGS} ${ICU} ${EMAILCOMMON_LDFLAGS} ${PALMSOCKET_LDFLAGS} ${SANDBOX_LDFLAGS} ${PMLOG_LDFLAGS} ${CARES_LDFLAGS} ${PMSTATEMACHINE_LDFLAGS}) 
 
 webos_build_program(NAME mojomail-pop)
 webos_build_system_bus_files()
