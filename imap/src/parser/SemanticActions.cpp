@@ -629,7 +629,7 @@ void SemanticActions::envMessageId() {
 }
 
 void SemanticActions::envEndAddress() {
-	EmailAddressPtr address = make_shared<EmailAddress>(m_envelope.m_addressDisplayName, m_envelope.m_addressEmail);
+	EmailAddressPtr address = boost::make_shared<EmailAddress>(m_envelope.m_addressDisplayName, m_envelope.m_addressEmail);
 	m_envelope.GetCurrentAddressList()->push_back(address);
 }
 

@@ -668,7 +668,7 @@ PopBusDispatcher::ClientPtr PopBusDispatcher::GetOrCreateClient(MojObject& accou
 	it = m_clients.find(accountId);
 	if (it == m_clients.end()) {
 		MojLogInfo(s_log, "Creating PopClient");
-		shared_ptr<DatabaseInterface> databaseInterface(new MojoDatabase(m_dbClient));
+		boost::shared_ptr<DatabaseInterface> databaseInterface(new MojoDatabase(m_dbClient));
 		client.reset(new PopClient(databaseInterface, this, accountId, &m_service));
 		m_clients[accountId] = client;
 		client->CreateSession();

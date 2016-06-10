@@ -201,7 +201,7 @@ void SyncEmailsCommand::SearchComplete()
 
 	unsigned int maxSize = ImapConfig::GetConfig().GetMaxEmails();
 
-	m_uidMap = make_shared<UIDMap>(m_allUIDs, folderSession->GetMessageCount(), maxSize);
+	m_uidMap = boost::make_shared<UIDMap>(m_allUIDs, folderSession->GetMessageCount(), maxSize);
 	folderSession->SetUIDMap(m_uidMap);
 
 	// Sort lists
