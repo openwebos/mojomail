@@ -183,7 +183,7 @@ void SelectFolderCommand::SelectDone()
 {
 	CommandTraceFunction();
 
-	boost::shared_ptr<FolderSession> folderSession = make_shared<FolderSession>(m_folder);
+	boost::shared_ptr<FolderSession> folderSession = boost::make_shared<FolderSession>(m_folder);
 
 	if(m_responseParser->GetExistsCount() > 0) // -1 means unknown
 		folderSession->SetMessageCount( m_responseParser->GetExistsCount() );
