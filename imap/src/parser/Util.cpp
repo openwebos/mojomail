@@ -45,7 +45,7 @@ static char STANDARD_ALPHABET[] =
     '6', '7', '8', '9', '+', ','
 };
 
-static char UTF7_DECODABET[] =
+static signed char UTF7_DECODABET[] =
     {
         -9,-9,-9,-9,-9,-9,-9,-9,-9,                 // Decimal  0 -  8
         -5,-5,                                      // Whitespace: Tab and Linefeed

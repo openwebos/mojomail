@@ -40,7 +40,7 @@ SmtpClient::ClientStatus::ClientStatus()
 
 }
 
-SmtpClient::SmtpClient(SmtpBusDispatcher* smtpBusDispatcher, shared_ptr<DatabaseInterface> dbInterface, shared_ptr<DatabaseInterface> tempDbInterface, MojLunaService* service)
+SmtpClient::SmtpClient(SmtpBusDispatcher* smtpBusDispatcher, boost::shared_ptr<DatabaseInterface> dbInterface, boost::shared_ptr<DatabaseInterface> tempDbInterface, MojLunaService* service)
 : BusClient(service),
   m_smtpBusDispatcher(smtpBusDispatcher),
   m_dbInterface(dbInterface),

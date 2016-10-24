@@ -42,9 +42,9 @@ pkg_check_modules(GLIB2 REQUIRED glib-2.0)
 include_directories(${GLIB2_INCLUDE_DIRS})
 webos_add_compiler_flags(ALL ${GLIB2_CFLAGS})
 
-pkg_check_modules(CJSON cjson)
-include_directories(${CJSON_INCLUDE_DIRS})
-webos_add_compiler_flags(ALL ${CJSON_CFLAGS})
+pkg_check_modules(JSON json-c)
+include_directories(${JSON_INCLUDE_DIRS})
+webos_add_compiler_flags(ALL ${JSON_CFLAGS})
 
 #pkg_check_modules(MOJODB mojodb)
 #include_directories(${MOJODB_INCLUDE_DIRS})
@@ -106,7 +106,7 @@ aux_source_directory(src/util util_files)
 
 add_library(email-common SHARED src/CommonErrors.cpp ${activity_files} ${client_files} ${data_files} ${exceptions_files} ${mimeparser_files} ${stream_files} ${async_files} ${email_files} ${glibcurl_files} ${network_files} ${util_files})
 
-target_link_libraries(email-common ${GLIB2_LDFLAGS} ${CJSON_LDFLAGS} ${PALMSOCKET_LDFLAGS} ${SANDBOX_LDFLAGS} ${PMLOG_LDFLAGS} ${LUNASERVICE_LDFLAGS} ${JEMALLOC_MT_LDFLAGS} ${ICU} ${ICUI18N} ${LIBZ} ${Boost_LIBRARIES} ${DB8_LDFLAGS} pthread curl)
+target_link_libraries(email-common ${GLIB2_LDFLAGS} ${JSON_LDFLAGS} ${PALMSOCKET_LDFLAGS} ${SANDBOX_LDFLAGS} ${PMLOG_LDFLAGS} ${LUNASERVICE_LDFLAGS} ${JEMALLOC_MT_LDFLAGS} ${ICU} ${ICUI18N} ${LIBZ} ${Boost_LIBRARIES} ${DB8_LDFLAGS} pthread curl)
 
 webos_build_pkgconfig()
 webos_build_library(NAME email-common)
